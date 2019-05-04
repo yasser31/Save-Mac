@@ -55,10 +55,10 @@ for i in game_maze:
     
     if i==1:
         game_window.blit(wall_image, wall_image.get_rect(left=a*wall_image_width, top=b*wall_image_height ))
-    x+=1
-    if x >17:
-        x=0
-        y+=1
+    a+=1
+    if a >17:
+        a=0
+        b+=1
     # update the window so we can see the changes
     pygame.display.flip()
 
