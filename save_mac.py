@@ -11,42 +11,40 @@ class Player:
         
     
     def move_right(self):
-        
         self.x=self.x+self.speed
-        maze.wall.sort()
         
-        for wall in maze.wall:
-            if collision.isCollision(wall.left,wall.top,self.x, self.y,30):
-                self.x=42
-        
-     
-                
-    def move_left(self):
-        self.x=self.x-self.speed
-        maze.wall.sort()
-        for wall in maze.wall:
-            if collision.isCollision(wall.left,wall.top,self.x, self.y,30):
-                self.x=self.x+42
-       
-     
-    def move_up(self):
-        self.y=self.y-self.speed
-        maze.wall.sort()
-        for wall in maze.wall:
-            if collision.isCollision(wall.left,wall.top,self.x, self.y,30):
-                self.y=self.y+42
-            if self.y<=41:
-                self.y=42
-
-    
-    def move_down(self):
-        self.y=self.y+self.speed
         maze.wall.sort()
         for wall in maze.wall:
             if collision.isCollision(wall.left,wall.top,self.x, self.y,32):
-                self.y=self.y-42
-            if self.y+37==500:
-                self.x=459
+                self.x=self.x-self.speed
+        
+    
+    def move_left(self):
+        self.x=self.x-self.speed
+        
+        maze.wall.sort()
+        for wall in maze.wall:
+            if collision.isCollision(wall.left,wall.top,self.x, self.y,30):
+                self.x=self.x + self.speed
+       
+    def move_up(self):
+        self.y=self.y-self.speed
+        
+        maze.wall.sort()
+        for wall in maze.wall:
+            if collision.isCollision(wall.left,wall.top,self.x, self.y,30):
+                self.y=self.y+self.speed
+            
+
+    def move_down(self):
+        self.y=self.y+self.speed
+        
+        
+        maze.wall.sort()
+        for wall in maze.wall:
+            if collision.isCollision(wall.left,wall.top,self.x, self.y,32):
+                self.y=self.y-self.speed
+            
 
 player=Player()   
 
@@ -80,11 +78,22 @@ for hack in objects:
 class Collision:
     
     def isCollision(self,x1,y1,x2,y2,bsize):
-        if x1 >= x2 and x1 <= x2 + bsize:  
+        if x1 >= x2 and x1 <= x2 + bsize: 
+            
+            if y1 == y2:
+                return True 
             if y1 >= y2 and y1 <= y2 + 37:
                 return True 
+            elif y2 >= y1 and y2 <= y1+maze.wall_image_height:
+                return True
            
-            return False
+           
+        
+        if y2 < 41 or y2 >= 415:
+            return True
+        
+        if x2 < 41:
+            return True
 
 collision=Collision()
 
@@ -122,8 +131,8 @@ class Maze:
             if i==1:
                 self.wall_image_rect=self.wall_image.get_rect(left=self.w_sprit_x*self.wall_image_width, 
                 top=self.w_sprit_y*self.wall_image_height )
-                game_window.blit(self.wall_image,self.wall_image_rect,)
                 self.wall.append(self.wall_image_rect)
+                game_window.blit(self.wall_image,self.wall_image_rect,)
                 pygame.draw.rect(self.wall_image,(255,0,0),self.wall_image_rect,2)
             
             self.w_sprit_x+=1
@@ -142,8 +151,6 @@ class App:
  
     def __init__(self):
         self.running = True
-        self.display_surf = None
-        self.back_image = None
         self.wall_image = None
         self.player = Player()
         self.maze = maze
@@ -152,16 +159,15 @@ class App:
     def on_init(self):
         pygame.init()
         pygame.display.set_caption('Save Mac')
-        self.game_window = pygame.display.set_mode((self.windowWidth,self.windowHeight), pygame.HWSURFACE)
         self.running = True
+        self.game_window = pygame.display.set_mode((self.windowWidth,self.windowHeight), pygame.HWSURFACE)
         self.gardien_image=pygame.image.load("images/gardien.png")
         self.mac_image = pygame.image.load("images/MacGyver.png").convert()
         self.back_image= pygame.image.load("images/back_ground.png").convert()
     
-    def on_event(self, event):
-        if event.type == QUIT:
-            self.running = False
- 
+    
+    
+        
      
     
     def on_render(self):
@@ -177,14 +183,12 @@ class App:
     
    
  
-    def on_cleanup(self):
-        pygame.quit()
- 
+    
     def on_execute(self):
-        if self.on_init() == False:
-            self.running = False
- 
+        self.on_init()
+        
         while( self.running ):
+            
             pygame.event.pump()
             keys = pygame.key.get_pressed()
             
@@ -201,12 +205,13 @@ class App:
                 self.player.move_down()
  
             if (keys[K_ESCAPE]):
-                self._running = False
- 
-            self.on_loop()
+                self.running = False
+            
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    self.running = False
             self.on_render()
-        self.on_cleanup()
- 
+            
 if __name__ == "__main__" :
     theApp = App()
     theApp.on_execute() 
