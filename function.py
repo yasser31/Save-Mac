@@ -9,15 +9,10 @@ from constant import (syringe, tube, ether, game_window, back_image,
 
 def objCollision(image):
     pygame.init()
-    em_space_x = []
-    em_space_y = []
-    for coor in app.maze.coor:
-        if coor['i'] == 'S':
-            em_space_x.append(coor['x'])
-            em_space_y.append(coor['y'])
-    xo = choice(em_space_x)
-    yo = choice(em_space_y)
-    rect = image.get_rect(left=xo, top=yo)
+    em_space = [{'x': coor['x'], 'y':coor['y']} for coor in app.maze.coor 
+                if coor['i'] == 'S']
+    object_coor = choice(em_space)
+    rect = image.get_rect(left=object_coor['x'], top=object_coor['y'])
     return rect
 
 rect1 = objCollision(syringe)

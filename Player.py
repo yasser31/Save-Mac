@@ -66,5 +66,5 @@ class Player:
                 game_window.blit(tube, rect)
             elif rect == rect3:
                 game_window.blit(ether, rect)   
-    
+        
         

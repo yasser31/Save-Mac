@@ -2,13 +2,13 @@
 # coding: utf-8
 from App import *
 from Player import * 
-from constant import mac_image, game_window, agent_image
+from constant import mac_image, game_window, agent_image, back_image
 # from function import objects_draw
 
 
 player = Player() 
 
- 
+
 while(app.running):
         
     pygame.event.pump()
@@ -32,9 +32,8 @@ while(app.running):
     for event in pygame.event.get():
         if event.type == QUIT:
             app.running = False
-        
+    
     app.on_render()
     game_window.blit(mac_image, (player.x, player.y))
     player.obj()
-    # objects_draw()
     pygame.display.flip()
