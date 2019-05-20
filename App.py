@@ -1,25 +1,61 @@
-from Maze import *
+import pygame
+from pygame.locals import *
 from constant import*
+from Maze import *
+from random import choice
 
 
 class App:
- 
+    # init the App instance
     def __init__(self):
+        pygame.init()
         self.running = True
+        self.game_over = False
         self.maze = Maze()
+        self.game_window = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT), 
+                                                   RESIZABLE) 
+        self.back_image = pygame.image.load("images/back_ground.png").convert()
+        self.agent_image = pygame.image.load("images/gardien.png")
+        self.wall_image = pygame.image.load('images/wall.png').convert()
+        self.syringe = pygame.image.load("images/syringe.png").convert()
+        self.tube = pygame.image.load("images/tube.jpeg").convert()
+        self.ether = pygame.image.load("images/ether.png").convert()
+    # Keeps the while loop running   
     
     def on_init(self):
         self.running = True
-        
+    
+    # render the maze, background image and the agent     
+    
     def on_render(self):
-        game_window.blit(back_image, (0, 0))
+        pygame.display.set_caption('Save Mac')
+        self.game_window.blit(self.back_image, (0, 0))
         for w in self.maze.coor:
             if w['i'] == 'a':
-                agent_rect = agent_image.get_rect(left=697, top=410)
-                game_window.blit(agent_image, agent_rect)
+                agent_rect = self.agent_image.get_rect(left=697, top=410)
+                self.game_window.blit(self.agent_image, agent_rect)
             elif w['i'] == '1':
-                wall_rect = wall_image.get_rect(left=w['x'], top=w['y'])
-                game_window.blit(wall_image, wall_rect)
-app = App() 
-app.maze.draw(game_window, wall_image)   
+                wall_rect = self.wall_image.get_rect(left=w['x'], top=w['y'])
+                pygame.draw.rect(self.wall_image, (255, 0, 0), wall_rect, 2)
+                self.game_window.blit(self.wall_image, wall_rect)
+    
+    # look for the possible coordiantes for the objects and get their rects
+    
+    def objectsRect(self, image):
+        em_space = [{'x': coor['x'], 'y':coor['y']} for coor in self.maze.coor 
+                    if coor['i'] == 'S']
+        object_coor = choice(em_space)
+        rect = image.get_rect(left=object_coor['x'], top=object_coor['y'])
+        return rect
+    
+    # shows the message at the end of the game
+    
+    def messageToScreen(self, msg, Color, backcolor):
+        font = pygame.font.SysFont(None, 25)
+        text = font.render(msg, True, Color)
+        self.game_window.fill(backcolor)
+        self.game_window.blit(text, (WINDOWWIDTH / 4, 
+                                     WINDOWHEIGHT / 2))
+        pygame.display.flip()
 
+        

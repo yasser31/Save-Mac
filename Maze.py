@@ -1,41 +1,45 @@
-import pygame
-from pygame import *
 from constant import *
 
-
+# starting position of Mac Gyver
 mac_coor = {}
+# list of the maze wall's rects, used for Mac collision with walls 
 w_rect = []
 
 
 class Maze:
     
     def __init__(self):
-        
+        # dict for all the coordinates, with a letter specifying wich element 
+        # it is 
         self.coor = []
         with open('Maze.txt', 'r') as self.file:
             self.maze = self.file.read()
-                
-    def draw(self, game_window, wall_image):
+    
+    # sets the maze coordinates including the player and agent and the space            
+    
+    def setCoordinates(self, wall_image):
+        # wall sprit in x
         wall_x = 0
+        # wall sprit in y
         wall_y = 0
-        
         for i in self.maze:
-            
+            # m is Mac Gyver
             if i == 'm':
-                mac_rect = mac_image.get_rect(left=wall_x*wall_wth, top=wall_y*wall_hght)
-                self.coor.append({'x': mac_rect.left, 'y': mac_rect.top, 'i': i})
-                mac_coor['C'] = {'x': mac_rect.left, 'y': mac_rect.top}
-            
+                self.coor.append({'x': wall_x*WALL_WTH, 'y': wall_y*WALL_HGHT, 
+                                 'i': i})
+                mac_coor['C'] = {'x': wall_x*WALL_WTH, 'y': wall_y*WALL_HGHT}
+            # S is empty space
             if i == 'S':
-                self.coor.append({'x': wall_x * wall_wth, 'y': wall_y * wall_hght, 'i': i})
-            
+                self.coor.append({'x': wall_x * WALL_WTH, 'y': wall_y * 
+                                 WALL_HGHT, 'i': i})
+            # 1 is the wall
             if i == '1':
-                wall_rect = wall_image.get_rect(left=wall_x*wall_wth, 
-                                                top=wall_y*wall_hght)
-                pygame.draw.rect(wall_image, (255, 0, 0), wall_rect, 2)
+                wall_rect = wall_image.get_rect(left=wall_x*WALL_WTH, 
+                                                top=wall_y*WALL_HGHT)
                 w_rect.append(wall_rect)
-                self.coor.append({'x': wall_rect.left, 'y': wall_rect.top, 'i': i})
-            
+                self.coor.append({'x': wall_rect.left, 'y': wall_rect.top, 'i': 
+                                 i})
+            # a is the agent
             if i == 'a':
                 self.coor.append({'x': 697, 'y': 410, 'i': i})
             
