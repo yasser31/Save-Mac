@@ -14,12 +14,13 @@ class App:
         self.maze = Maze()
         self.game_window = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT), 
                                                    RESIZABLE) 
-        self.back_image = pygame.image.load("images/back_ground.png").convert()
-        self.agent_image = pygame.image.load("images/gardien.png")
-        self.wall_image = pygame.image.load('images/wall.png').convert()
-        self.syringe = pygame.image.load("images/syringe.png").convert()
-        self.tube = pygame.image.load("images/tube.jpeg").convert()
-        self.ether = pygame.image.load("images/ether.png").convert()
+        self.back_image = pygame.image.load(BACK_IMAGE).convert()
+        self.agent_image = pygame.image.load(AGENT).convert()
+        self.wall_image = pygame.image.load(WALL_IMAGE).convert()
+        self.syringe = pygame.image.load(SYRINGE).convert()
+        self.tube = pygame.image.load(TUBE).convert()
+        self.ether = pygame.image.load(ETHER).convert()
+    
     # Keeps the while loop running   
     
     def on_init(self):

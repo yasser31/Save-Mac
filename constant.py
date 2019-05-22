@@ -1,4 +1,11 @@
-
+MAC = "images/MacGyver.png"
+BACK_IMAGE = "images/back_ground.png"
+AGENT = "images/gardien.png"
+WALL_IMAGE = "images/wall.png"
+SYRINGE = "images/syringe.png"
+TUBE = "images/tube.jpeg"
+ETHER = "images/ether.png"
+SPEED = 1
 WINDOWWIDTH = 735
 WINDOWHEIGHT = 500
 WALL_WTH = 41
