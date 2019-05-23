@@ -1,14 +1,13 @@
 from constant import *
 
-# starting position of Mac Gyver
-mac_coor = {}
-# list of the maze wall's rects, used for Mac collision with walls 
-w_rect = []
-
 
 class Maze:
     
     def __init__(self):
+        # starting position of Mac Gyver
+        self.mac_coor = {}
+        # list of the maze wall's rects, used for Mac collision with walls 
+        self.w_rect = []
         # dict for all the coordinates, with a letter specifying wich element 
         # it is 
         self.coor = []
@@ -17,7 +16,7 @@ class Maze:
     
     # sets the maze coordinates including the player and agent and the space            
     
-    def setCoordinates(self, wall_image):
+    def set_coordinates(self, wall_image):
         # wall sprit in x
         wall_x = 0
         # wall sprit in y
@@ -27,7 +26,8 @@ class Maze:
             if i == 'm':
                 self.coor.append({'x': wall_x*WALL_WTH, 'y': wall_y*WALL_HGHT, 
                                  'i': i})
-                mac_coor['C'] = {'x': wall_x*WALL_WTH, 'y': wall_y*WALL_HGHT}
+                self.mac_coor['C'] = {'x': wall_x*WALL_WTH, 
+                                      'y': wall_y*WALL_HGHT}
             # S is empty space
             if i == 'S':
                 self.coor.append({'x': wall_x * WALL_WTH, 'y': wall_y * 
@@ -36,7 +36,7 @@ class Maze:
             if i == '1':
                 wall_rect = wall_image.get_rect(left=wall_x*WALL_WTH, 
                                                 top=wall_y*WALL_HGHT)
-                w_rect.append(wall_rect)
+                self.w_rect.append(wall_rect)
                 self.coor.append({'x': wall_rect.left, 'y': wall_rect.top, 'i': 
                                  i})
             # a is the agent

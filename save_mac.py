@@ -1,14 +1,17 @@
 #! /home/yasser/Bureau/projets N°3/env/bin/python
 # coding: utf-8
 from App import *
+
 from constant import COLOR, BACKCOLOR
+
 from Player import *
 
 
 class Game():
+    
     def __init__(self):
         self.app = App()
-        self.app.maze.setCoordinates(self.app.wall_image)
+        self.app.maze.set_coordinates(self.app.wall_image)
         self.player = Player(self.app)
         self.player.x, self.player.y = self.player.set_X_Y()
     
@@ -37,8 +40,8 @@ class Game():
             self.app.on_render()
             self.app.game_window.blit(self.player.mac_image, 
                                       (self.player.x, self.player.y))
-            self.player.objectsBlit()
-            self.player.objPlayerCollision()               
+            self.player.objects_blit()
+            self.player.obj_player_collision()               
             self.player.loose()
             self.player.win()
             self.player.counter()
@@ -47,11 +50,11 @@ class Game():
                 break
         while self.app.game_over is True:
             if self.player.loose() == 'loose':
-                self.app.messageToScreen('sorry, you lost, click C to restart, Q to quit', 
-                                         COLOR, BACKCOLOR)
+                self.app.message_to_screen('sorry, you lost, click C to restart, Q to quit', 
+                                           COLOR, BACKCOLOR)
             if self.player.win() == 'win':
-                self.app.messageToScreen("You'r the champ, C to restart, Q to quit", 
-                                         COLOR, BACKCOLOR)
+                self.app.message_to_screen("You'r the champ, C to restart, Q to quit", 
+                                           COLOR, BACKCOLOR)
             for event in pygame.event.get():
                 if event.type == KEYDOWN:
                     if event.key == K_q:

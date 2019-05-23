@@ -1,8 +1,12 @@
-import pygame
-from pygame.locals import *
-from constant import*
-from Maze import *
 from random import choice
+
+import pygame
+
+from pygame.locals import *
+
+from constant import*
+
+from Maze import *
 
 
 class App:
@@ -12,8 +16,8 @@ class App:
         self.running = True
         self.game_over = False
         self.maze = Maze()
-        self.game_window = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT), 
-                                                   RESIZABLE) 
+        self.game_window = pygame.display.set_mode((WINDOW_WIDTH, 
+                                                   WINDOW_HEIGHT)) 
         self.back_image = pygame.image.load(BACK_IMAGE).convert()
         self.agent_image = pygame.image.load(AGENT).convert()
         self.wall_image = pygame.image.load(WALL_IMAGE).convert()
@@ -42,7 +46,7 @@ class App:
     
     # look for the possible coordiantes for the objects and get their rects
     
-    def objectsRect(self, image):
+    def objects_rect(self, image):
         em_space = [{'x': coor['x'], 'y':coor['y']} for coor in self.maze.coor 
                     if coor['i'] == 'S']
         object_coor = choice(em_space)
@@ -51,12 +55,12 @@ class App:
     
     # shows the message at the end of the game
     
-    def messageToScreen(self, msg, Color, backcolor):
+    def message_to_screen(self, msg, Color, backcolor):
         font = pygame.font.SysFont(None, 25)
         text = font.render(msg, True, Color)
         self.game_window.fill(backcolor)
-        self.game_window.blit(text, (WINDOWWIDTH / 4, 
-                                     WINDOWHEIGHT / 2))
+        self.game_window.blit(text, (WINDOW_WIDTH / 4, 
+                                     WINDOW_HEIGHT / 2))
         pygame.display.flip()
 
         
