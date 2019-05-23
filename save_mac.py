@@ -1,5 +1,3 @@
-#! /home/yasser/Bureau/projets N°3/env/bin/python
-# coding: utf-8
 from App import *
 
 from constant import COLOR, BACKCOLOR

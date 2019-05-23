@@ -25,11 +25,6 @@ class App:
         self.tube = pygame.image.load(TUBE).convert()
         self.ether = pygame.image.load(ETHER).convert()
     
-    # Keeps the while loop running   
-    
-    def on_init(self):
-        self.running = True
-    
     # render the maze, background image and the agent     
     
     def on_render(self):
