@@ -1,5 +1,8 @@
 {
     "python.pythonPath": "/home/yasser/Bureau/projets N°3/env/bin/python",
-    "python.linting.pep8Enabled": true,
-    "python.linting.pylintEnabled":true
+    "python.linting.pep8Enabled": false,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pydocstyleEnabled": false,
+    "python.linting.enabled": true,
+   
 }

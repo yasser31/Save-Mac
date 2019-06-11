@@ -14,14 +14,14 @@ TUBE = "images/tube.jpeg"
 # the bottle of ether Image
 ETHER = "images/ether.png"
 # =======================================================================
-# the speed of the player 
-SPEED = 1
+# the speed of the player
+SPEED = 0.8
 # =========================================================================
 # the game window width
 WINDOW_WIDTH = 735
 # the game window height
 WINDOW_HEIGHT = 500
-# wall image width 
+# wall image width
 WALL_WTH = 41
 # wall image height
 WALL_HGHT = 41
