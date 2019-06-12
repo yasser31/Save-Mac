@@ -1,6 +1,6 @@
 # ===================================================================
 """
-this file contains constants that the program needs to run 
+this file contains constants that the program needs to run
 """
 MAC = "images/MacGyver.png"
 # Background image

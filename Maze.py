@@ -1,7 +1,8 @@
 from constant import *
 
-""" this class opens and reads the file containing the maze and 
-creates lists of dictionnaries containing the coordinates of the maze elements"""
+""" this class opens and reads the file containing the maze and
+creates lists of dictionnaries containing
+the coordinates of the maze elements"""
 
 
 class Maze:
@@ -17,9 +18,8 @@ class Maze:
         with open('Maze.txt', 'r') as self.file:
             self.maze = self.file.read()
 
-    
     # method that sets the coordinates
-    
+
     def set_coordinates(self, wall_image):
         # wall sprit in x
         wall_x = 0

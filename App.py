@@ -25,11 +25,11 @@ class App:
         self.tube = pygame.image.load(TUBE).convert()
         self.ether = pygame.image.load(ETHER).convert()
 
-    """ the method iterates through maze.coor list 
+    """ the method iterates through maze.coor list
     and checks if it is a wall or the agent, if so it will
-    blit them, this method doesn't blit the player or 
+    blit them, this method doesn't blit the player or
     the objects """
-    
+
     def on_render(self):
         pygame.display.set_caption('Save Mac')
         self.game_window.blit(self.back_image, (0, 0))
@@ -43,7 +43,7 @@ class App:
                 self.game_window.blit(self.wall_image, wall_rect)
 
     """ iterates through maze.coor, if there is an empty
-    space it will put it in th em_space, then call choice 
+    space it will put it in th em_space, then call choice
     method to have a random position of the objects
     at each time the game is run"""
 
