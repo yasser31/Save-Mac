@@ -2,6 +2,10 @@ from App import *
 
 from constant import COLOR, MAC, SPEED
 
+""" this class contains methods that handle the player starting position
+the movements of the player, collision with walls and objects, the blit 
+of the objects, the win, the lost, the object counter, removing 
+objects from the screen """
 
 class Player:
 
@@ -13,7 +17,9 @@ class Player:
         self.rect3 = app.objects_rect(app.ether)
         self.rects = [self.rect1, self.rect2, self.rect3]
         self.objects_collected = 0
-
+    
+    # player starting position 
+    
     def set_X_Y(self):
         self.x = self.app.maze.mac_coor['C']['x']
         self.y = self.app.maze.mac_coor['C']['y']
@@ -38,7 +44,8 @@ class Player:
 
     args = ['x', 'y', 'r', 'l', 'd', 'u']
 
-    # detect collision between Mac and walls
+    """this method checks if there is a collision between the player and walls
+    it takes as arguments the axe that the player is moving on and the direction"""
 
     def player_wall_collision(self, *args):
         mac_rect = self.mac_image.get_rect(left=self.x, top=self.y)
@@ -53,7 +60,10 @@ class Player:
                 elif 'x' in args and 'l' in args:
                     self.x = self.x + SPEED
 
-    # detect wich object has been touched
+    """ this method iterate on the objects list and then 
+    calls remove_objects method who will check if there 
+    is collision with an objects, is so it will remove it 
+    from the blit so it will not be blit again """
 
     def obj_player_collision(self):
         for item in self.rects:
@@ -64,7 +74,8 @@ class Player:
             elif item == self.rect3:
                 self.remove_object(self.rect3)
 
-    # blit the objects on the screen
+    """ depending on objects present in rects 
+    this method will blit the objects"""
 
     def objects_blit(self):
         for rect in self.rects:
@@ -75,8 +86,10 @@ class Player:
             elif rect == self.rect3:
                 self.app.game_window.blit(self.app.ether, rect)
 
-    # detect Mac Gyver has escaped
-
+    """ detect collision between the player and the agent 
+    then checks if objects_collected is equal to three 
+    to determine that the player has won"""
+    
     def win(self):
         mac_rect = self.mac_image.get_rect(left=self.x, top=self.y)
         agent_rect = self.app.agent_image.get_rect(left=697, top=410)
@@ -84,8 +97,9 @@ class Player:
             if self.objects_collected == 3:
                 self.app.game_over = True
                 return 'win'
-
-    # detect if Mac went to the end without the three objects
+    """ detect collision with the agent then checks 
+    if objects_collected is not equal to 3, if so the player 
+    loose"""
 
     def loose(self):
         mac_rect = self.mac_image.get_rect(left=self.x, top=self.y)
@@ -102,7 +116,9 @@ class Player:
         text = font.render(str(self.objects_collected), True, COLOR)
         self.app.game_window.blit(text, (42, 42))
 
-    # detect collision and remove the object
+    """ if there is collision between the player 
+    and an object, it removes the objects from 
+    self.rects """
 
     def remove_object(self, rect):
         mac_rect = self.mac_image.get_rect(left=self.x, top=self.y)

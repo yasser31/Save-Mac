@@ -24,8 +24,12 @@ class App:
         self.syringe = pygame.image.load(SYRINGE).convert()
         self.tube = pygame.image.load(TUBE).convert()
         self.ether = pygame.image.load(ETHER).convert()
-    # render the maze, background image and the agent
 
+    """ the method iterates through maze.coor list 
+    and checks if it is a wall or the agent, if so it will
+    blit them, this method doesn't blit the player or 
+    the objects """
+    
     def on_render(self):
         pygame.display.set_caption('Save Mac')
         self.game_window.blit(self.back_image, (0, 0))
@@ -38,7 +42,10 @@ class App:
                 pygame.draw.rect(self.wall_image, (255, 0, 0), wall_rect, 2)
                 self.game_window.blit(self.wall_image, wall_rect)
 
-    # look for the possible coordiantes for the objects and get their rects
+    """ iterates through maze.coor, if there is an empty
+    space it will put it in th em_space, then call choice 
+    method to have a random position of the objects
+    at each time the game is run"""
 
     def objects_rect(self, image):
         em_space = [{'x': coor['x'], 'y':coor['y']} for coor in self.maze.coor

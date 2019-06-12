@@ -5,9 +5,12 @@ from constant import COLOR, BACKCOLOR
 
 from Player import *
 
+""" this is the class that runs the programme, all the methods needed are 
+called here, the main loop is here and the loop that restart the game """
+
 
 class Game():
-
+    
     def __init__(self):
         self.app = App()
         self.app.maze.set_coordinates(self.app.wall_image)

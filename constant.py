@@ -1,5 +1,7 @@
 # ===================================================================
-# Mac Gyver image
+"""
+this file contains constants that the program needs to run 
+"""
 MAC = "images/MacGyver.png"
 # Background image
 BACK_IMAGE = "images/back_ground.png"
